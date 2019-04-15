@@ -1,7 +1,6 @@
 class CreateTrips < ActiveRecord::Migration[5.2]
   def change
     create_table :trips do |t|
-      t.integer :id
       t.integer :driver_id
       t.integer :passenger_id
       t.date :date
