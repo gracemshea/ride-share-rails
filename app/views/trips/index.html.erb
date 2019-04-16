@@ -1,0 +1,17 @@
+<h1>List of Trips</h1>
+
+<p>There are currently <%= @trips.length %> recorded trips.</p>
+
+<ul>
+  <% @trips.each do |trip| %>
+    <li>
+      <strong>
+        <%= link_to trip.id, trip_path(trip) %>
+      </strong>
+      <strong>
+        Date: 
+      </strong>
+      <%= trip.date%>
+    </li>
+  <% end %>
+</ul>
