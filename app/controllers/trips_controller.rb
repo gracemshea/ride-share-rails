@@ -33,14 +33,40 @@ class TripsController < ApplicationController
   end
 
   def update
+    @trip = Trip.find_by(id: params[:id]))
+    if @trip
+      if @trip.update trip_params
+        redirect_to trip_path(@trip.id), { :flash => { :success => "Trip has been updated" } }
+      else
+        redirect_to :edit, :flash => { :error => "Failed to update trip" }
+      end
+    else
+      redirect_to root_path, status: 302, :flash => { :error => "Could not find trip with id: #{params[:id]}" }
+    end
   end
 
   def destroy
+    @trip = Trip.find_by(id: params[:id])
+    if @trip
+      if @trip.destroy
+        redirect_to root_path, { :flash => { :success => "Trip has been removed" } }
+      else
+        redirect_to root_path, { :flash => { :error => "Failed to delete trip" } }
+      end
+    else
+      redirect_to root_path, status: 302, { :flash => { :error => "Could not find trip with id: #{params[:id]}" } }
+    end
   end
 
   private
 
   def trip_params
-    return params.require(:trip).permit(:name, :vin)
+    return params.require(:trip).permit(
+      :passenger_id,
+      :driver_id,
+      :date,
+      :rating,
+      :cost
+      )
   end
 end
