@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resources :trips
 
   # Drivers
+  resources :drivers, only: [:index, :show]
 
   # Passengers
 
