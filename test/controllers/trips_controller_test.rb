@@ -8,6 +8,7 @@ describe TripsController do
 
       # Assert
       must_respond_with :success
+    end
   end
 
   describe "edit" do
@@ -43,45 +44,43 @@ describe TripsController do
         patch trip_path(test_id), params: trip_hash
       }.wont_change "Trip.count"
 
-      
       updated_task = Trip.find_by(id: trip_hash[:trip][:id])
 
       expect(updated_task.description).must_equal trip_hash[:task][:description]
 
       must_respond_with :redirect
       must_redirect_to task_path(test_id)
+    end
   end
 
   describe "create" do
     it "can create a new trip" do
       trip_hash = {
         trip: {
-          passenger_id: 1,
-          driver_id: 1,
+          passenger_id: 2,
+          driver_id: 2,
           date: "20190416",
           rating: 5,
           cost: 15.75,
         },
       }
 
+      # Act-Assert
+      expect {
+        post trips_path, params: trip_hash
+      }.must_change "Trip.count", 1
 
-    # Act-Assert
-    expect {
-      post trips_path, params: trip_hash
-    }.must_change "Trip.count", 1
+      new_trip = Trip.find_by(name: trip_hash[:trip][:id])
 
-    new_trip = Trip.find_by(name: trip_hash[:trip][:id])
+      expect(new_trip.passenger_id).must_equal trip_hash[:trip][:passenger_id]
+      expect(new_trip.driver_id).must_equal trip_hash[:trip][:driver_id]
+      expect(new_trip.date).must_equal trip_hash[:trip][:date]
+      expect(new_trip.rating).must_equal trip_hash[:trip][:rating]
+      expect(new_trip.cost).must_equal trip_hash[:trip][:cost]
 
-
-    expect(new_trip.passenger_id).must_equal trip_hash[:trip][:passenger_id]
-    expect(new_trip.driver_id).must_equal trip_hash[:trip][:driver_id]
-    expect(new_trip.date).must_equal trip_hash[:trip][:date]
-    expect(new_trip.rating).must_equal trip_hash[:trip][:rating]
-    expect(new_trip.cost).must_equal trip_hash[:trip][:cost]
-
-    must_respond_with :redirect
-    must_redirect_to trip_path(new_trip.id)
-  end
+      must_respond_with :redirect
+      must_redirect_to trip_path(new_trip.id)
+    end
   end
 
   describe "destroy" do

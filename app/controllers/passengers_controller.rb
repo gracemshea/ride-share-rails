@@ -12,11 +12,11 @@ class PassengersController < ApplicationController
 
   def create
     @passenger = Passenger.new(passenger_params)
-      if @passenger.save
-        redirect_to passenger_path(@passenger.id), { :flash => { :success => "Passenger has been added" } }
-      else
-        redirect_to :new, :flash => { :error => "Failed to add passenger" }
-      end
+    if @passenger.save
+      redirect_to passenger_path(@passenger.id), { :flash => { :success => "Passenger has been added" } }
+    else
+      redirect_to :new, :flash => { :error => "Failed to add passenger" }
+    end
   end
 
   def new
@@ -31,7 +31,7 @@ class PassengersController < ApplicationController
   end
 
   def update
-    @passenger = Passenger.find_by(id: params[:id]))
+    @passenger = Passenger.find_by(id: params[:id])
     if @passenger
       if @passenger.update passenger_params
         redirect_to trip_path(@trip.id), { :flash => { :success => "Passenger has been updated" } }
@@ -52,7 +52,7 @@ class PassengersController < ApplicationController
         redirect_to root_path, { :flash => { :error => "Failed to delete passenger" } }
       end
     else
-      redirect_to root_path, status: 302, { :flash => { :error => "Could not find passenger with id: #{params[:id]}" } }
+      redirect_to root_path, status: 302, :flash => { :error => "Could not find passenger with id: #{params[:id]}" }
     end
   end
 
@@ -60,8 +60,8 @@ class PassengersController < ApplicationController
 
   def passenger_params
     return params.require(:passenger).permit(
-      :name,
-      :phone_num,
-    )
+             :name,
+             :phone_num,
+           )
   end
 end
