@@ -6,3 +6,13 @@
 <p>
   VIN:  <%= @driver.vin %>
 </p>
+
+<h3>Trips History</h3>
+
+<ul>
+  <% @driver.trips.each do |trip|%>
+    <li>
+      <%= trip.date %>
+    </li>
+  <% end %>
+</ul>
