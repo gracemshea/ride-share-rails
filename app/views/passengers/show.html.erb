@@ -1,10 +1,15 @@
 <h2>Passenger details page</h2>
 
-<p>
-  Name: <%= @passenger.name %>
-</p>
-<p>
-  Phone Number:  <%= @passenger.phone_num %>
-</p>
 
-<%# add list of all trips taken %>
+<p>Name:<%=@passenger.name%></p>
+<p>Phone Number:<%=@passenger.phone_num%></p>
+<ul>
+<% @passenger.trips.each do |trip|%>
+    <li>
+        <p>Date: <%=trip.date%></p>
+        <p>Rating: <%=trip.rating%></p>
+        <p>Cost: $<%='%.2f'%trip.cost %></p>
+        <p>Driver: <%= link_to trip.driver.name, driver_path(trip.driver.id)%></p>
+    </li>
+<%end%>
+</ul>
