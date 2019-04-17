@@ -1,22 +1,7 @@
 <h2>Trip details page</h2>
 
-<p>
-  ID: <%= @trip.id %>
-</p>
-<p>
-  Date:  <%= @trip.date %>
-</p>
-<p>
-  Driver Name: <%= @trip.driver_id %>
-</p>
-
-<%# note to self - rewrite the IDs as names %>
-<p>
-  Passenger Name:  <%= @trip.passenger_id %>
-</p>
-<p>
-  Driver Rated:  <%= @trip.rating %> 
-</p>
-<p>
-  Trip Cost: <%= @trip.cost%> 
-</p>
+<p>Date:<%= @trip.date %></p>
+<p>Rating:<%= @trip.rating %></p>
+<p>Cost: $<%= '%.2f'% @trip.cost %></p>
+<p>Passenger:<%= link_to @trip.passenger.name, passenger_path(@trip.passenger.id) %></p>
+<p>Driver:<%= link_to @trip.driver.name, driver_path(@trip.driver.id) %> </p>
