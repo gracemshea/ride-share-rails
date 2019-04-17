@@ -1,4 +1,4 @@
-require "../test_helper"
+require "test_helper"
 
 describe DriversController do
   describe "index" do
@@ -38,12 +38,6 @@ describe DriversController do
       # Arrange
       driver_id = 12345
 
-      # Act-Assert
-      # TODO -- why can I get it to acknowledge a 404 response??
-      # assert_raises ActiveRecord::RecordNotFound do
-      #   get driver_path(driver_id)
-      # end
-
       # Act
       get driver_path(driver_id)
 
@@ -64,10 +58,19 @@ describe DriversController do
 
   describe "new" do
     # Your tests go here
+    it "retruns status code 200" do
+      get new_driver_path
+      must_respond_with :ok
+    end
   end
 
   describe "create" do
     # Your tests go here
+    it "creates a new driver" do
+    end
+
+    it "sends back bad_request if no driver data is sent" do
+    end
   end
 
   describe "destroy" do
