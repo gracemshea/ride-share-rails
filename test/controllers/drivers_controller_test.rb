@@ -67,6 +67,27 @@ describe DriversController do
   describe "create" do
     # Your tests go here
     it "creates a new driver" do
+
+      # Arrange
+      driver_data = {
+        driver: {
+          name: "Test Driver",
+          vin: "12345678901234567",
+        },
+      }
+
+      # Act
+      expect {
+        post drivers_path, params: driver_data
+      }.must_change "Driver.count", +1
+
+      # Assert
+      must_respond_with :redirect
+      must_redirect_to drivers_path
+
+      driver = Driver.last
+      expect(driver.name).must_equal driver_data[:driver][:name]
+      expect(driver.vin).must_equal driver_data[:driver][:vin]
     end
 
     it "sends back bad_request if no driver data is sent" do
