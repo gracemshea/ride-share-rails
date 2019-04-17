@@ -1,15 +1,50 @@
-/*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
- *
- * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
- * vendor/assets/stylesheets directory can be referenced here using a relative path.
- *
- * You're free to add application-wide styles to this file and they'll appear at the bottom of the
- * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
- * files in this directory. Styles in this file should be added after the last require_* statement.
- * It is generally better to create a new file per style scope.
- *
- *= require_tree .
- *= require_self
- */
+
+body {
+  background-color: #28281A;
+  color: #F0E9D5; 
+  font-family: 'Do Hyeon', sans-serif;
+}
+
+/* other colors on palette:
+#BDAE8F light green pale
+#947E58 light green brown */
+
+h1, h2 {
+	font-family: 'Dokdo', cursive;
+}
+
+h1 {
+  font-size: 7em;
+}
+
+h2 {
+  font-size: 3em;
+}
+
+.header {
+  line-height: 1.25em;
+  overflow: hidden; /* Ensures the content is not revealed until the animation */
+  border-right: .15em solid black; /* The typwriter cursor */
+  white-space: nowrap; /* Keeps the content on a single line */
+  margin: 0 auto; /* Gives that scrolling effect as the typing happens */
+  letter-spacing: .15em; /* Adjust as needed */
+  animation: 
+    typing 3.5s steps(40, end),
+    blink-caret .75s step-end infinite;
+}
+
+.subtitle {
+  animation-delay: 5s;}
+  
+/* The typing effect */
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+
+/* The typewriter cursor effect */
+@keyframes blink-caret {
+  from, to { border-color: transparent }
+  50% { border-color: #F0E9D5}
+}
+
