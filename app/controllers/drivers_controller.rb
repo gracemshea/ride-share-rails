@@ -6,7 +6,7 @@ class DriversController < ApplicationController
   def show
     driver_id = params[:id]
 
-    @driver = Driver.find(params[:id])
+    @driver = Driver.find_by(id: driver_id)
 
     unless @driver
       head :not_found
