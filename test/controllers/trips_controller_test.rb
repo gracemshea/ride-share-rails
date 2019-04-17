@@ -1,8 +1,12 @@
 require "test_helper"
 
 describe TripsController do
+  before do
+    @trip = Trip.create!(passenger_id: 1, driver_id: 1, date: "20190416", rating: 5, cost: 15.75)
+  end
   describe "show" do
     it "can get a valid trip" do
+      @trip
       # Act
       get trip_path(trip.id)
 
