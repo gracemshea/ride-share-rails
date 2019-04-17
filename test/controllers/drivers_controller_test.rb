@@ -91,6 +91,20 @@ describe DriversController do
     end
 
     it "sends back bad_request if no driver data is sent" do
+      # Arrange
+      driver_data = {
+        driver: {
+          name: "",
+        },
+      }
+
+      # Act
+      expect {
+        post drivers_path, params: driver_data
+      }.wont_change "Driver.count"
+
+      # Assert
+      must_respond_with :bad_request
     end
   end
 
