@@ -1,4 +1,4 @@
-require "Date"
+# require "Date"
 
 class TripsController < ApplicationController
   def index
@@ -41,7 +41,7 @@ class TripsController < ApplicationController
   end
 
   def edit
-    @trip = Trip.find(params[:id])
+    @trip = Trip.find_by(id: params[:id])
     if !@trip
       redirect_to trips_path, :flash => { :error => "Could not find trip with id: #{params[:id]}" }
     end
