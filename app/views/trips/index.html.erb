@@ -5,12 +5,12 @@
 <ul>
   <% @trips.each do |trip| %>
     <li>
-      <p>ID:<%= link_to trip.id, trip_path(trip.id) %></p>
-      <p>Date:<%= trip.date %></p>
-      <p>Rating:<%= trip.rating %></p>
-      <p>Cost: $<%='%.2f'%trip.cost%></p>
-      <p>Passenger:<%= link_to trip.passenger.name, passenger_path(trip.passenger.id) %></p>
-      <p>Driver:<%= link_to trip.driver.name, driver_path(trip.driver.id) %> </p>
+      <p>ID: <%= link_to trip.id, trip_path(trip.id) %></p>
+      <p>Date: <%= trip.date %></p>
+      <p>Rating: <%= trip.rating.nil? ? "TBD" : trip.rating %></p>
+      <p>Cost: <%= trip.cost.nil? ? "TBD" :  "$" '%.2f' % (trip.cost/100) %></p>
+      <p>Passenger: <%= link_to trip.passenger.name, passenger_path(trip.passenger.id) %></p>
+      <p>Driver: <%= link_to trip.driver.name, driver_path(trip.driver.id) %> </p>
     </li>
   <% end %>
 </ul>
