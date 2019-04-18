@@ -34,6 +34,10 @@ class Driver < ApplicationRecord
     return "%.1f" % average_rating
   end
 
+  def self.select_driver
+    return Driver.all.sample
+  end
+
   # Average rating for a driver
   # def average_rating
   #   return "N/A" if self.trips = []

@@ -1,3 +1,5 @@
+require "Date"
+
 class TripsController < ApplicationController
   def index
     if params[:driver_id]
@@ -23,18 +25,20 @@ class TripsController < ApplicationController
 
   # Do we even need new and create??
 
-  # def create
-  #   @trip = Trip.new(trip_params)
-  #   if @trip.save
-  #     redirect_to trip_path(@trip.id), { :flash => { :success => "Trip has been added" } }
-  #   else
-  #     redirect_to :new, :flash => { :error => "Failed to add trip" }
-  #   end
-  # end
+  def create
+    @trip = Trip.new(trip_params)
+    @trip.date = Date.today
+    @trip.driver = Driver.select_driver
+    if @trip.save
+      redirect_to trip_path(@trip.id), { :flash => { :success => "Trip has been added" } }
+    else
+      render :new, :flash => { :error => "Failed to add trip" }
+    end
+  end
 
-  # def new
-  #   @trip = Trip.new
-  # end
+  def new
+    @trip = Trip.new
+  end
 
   def edit
     @trip = Trip.find(params[:id])
