@@ -3,13 +3,19 @@
 
 <p>Name:<%=@passenger.name%></p>
 <p>Phone Number:<%=@passenger.phone_num%></p>
-<ul>
-<% @passenger.trips.each do |trip|%>
-    <li>
-        <p>Date: <%=trip.date%></p>
-        <p>Rating: <%=trip.rating%></p>
-        <p>Cost: $<%='%.2f'%trip.cost %></p>
-        <p>Driver: <%= link_to trip.driver.name, driver_path(trip.driver.id)%></p>
-    </li>
-<%end%>
-</ul>
+
+<table>
+	<tbody>
+    <%@passenger.trips.each do |trip|%>
+		<tr>
+            <td>Trip ID: <%=trip.id%> </td>
+			<td>Date: <%=trip.date%> </td>
+			<td>Rating: <%=trip.rating%> </td>
+			<td>Cost: $<%='%.2f'%(trip.cost/100) %></td>
+			<td>Driver: <%= link_to trip.driver.name, driver_path(trip.driver.id)%></td>
+		</tr>
+        <%end%>
+	</tbody>
+</table>
+
+<p><%=@passenger.name%> has spent a total of $<%='%.2f'% @passenger.total_amount%> on Tail-Wagon.</p>

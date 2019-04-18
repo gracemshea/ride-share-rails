@@ -8,7 +8,7 @@ class Passenger < ApplicationRecord
   def total_amount
     total = 0
     self.trips.each do |trip|
-      total += trip.cost
+      total += trip.cost / 100
     end
     return total
   end
