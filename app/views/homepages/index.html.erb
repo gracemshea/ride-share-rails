@@ -7,7 +7,6 @@
 <nav>
 <h1 class ="header">  <br>Tail-Wagon </h1>
 <h2>A Pet-Friendly Rideshare App</h2>
-
 <%# dog face, will embed at later stages of styling %>
  <%# <%= link_to(image_tag("dogface.png", alt: "home", class: "icon"),root_path) %> 
 
@@ -18,8 +17,14 @@
   </ul>
 </nav>
 
-
+<main>
+<h3>About Us</h3>
+<p>We have <%= @drivers_num %> drivers and <%= @passengers_num %> passengers using our app, and a total of <%= @trips_num %> trips.</p>
+</main>
 
 </body>
 
 </html>
+
+
+
