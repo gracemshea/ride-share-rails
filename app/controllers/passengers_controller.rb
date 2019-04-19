@@ -53,7 +53,7 @@ class PassengersController < ApplicationController
         redirect_to passengers_path, { :flash => { :error => "Failed to delete passenger" } }
       end
     else
-      redirect_to passengers_path, status: 302, :flash => { :error => "Could not find passenger with id: #{params[:id]}" }
+      redirect_to passengers_path, status: 404, :flash => { :error => "Could not find passenger with id: #{params[:id]}" }
     end
   end
 
