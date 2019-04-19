@@ -44,15 +44,16 @@ class PassengersController < ApplicationController
   end
 
   def destroy
-    @passenger = Passenger.find_by(id: params[:id])
-    if @passenger
-      if @passenger.destroy
-        redirect_to root_path, { :flash => { :success => "Passenger has been removed" } }
+    passenger = Passenger.find_by(id: params[:id])
+
+    if passenger
+      if passenger.destroy
+        redirect_to passengers_path, { :flash => { :success => "Passenger has been removed" } }
       else
-        redirect_to root_path, { :flash => { :error => "Failed to delete passenger" } }
+        redirect_to passengers_path, { :flash => { :error => "Failed to delete passenger" } }
       end
     else
-      redirect_to root_path, status: 302, :flash => { :error => "Could not find passenger with id: #{params[:id]}" }
+      redirect_to passengers_path, status: 302, :flash => { :error => "Could not find passenger with id: #{params[:id]}" }
     end
   end
 

@@ -133,6 +133,18 @@ describe PassengersController do
   end
 
   describe "destroy" do
-    # Your tests go here
+    it "removes the driver from the database" do
+      # Act
+      expect {
+        delete passenger_path(@passenger)
+      }.must_change "Passenger.count", -1
+
+      # Assert
+      must_respond_with :redirect
+      must_redirect_to passengers_path
+
+      destroyed_passenger = Passenger.find_by(id: @passenger.id)
+      expect(destroyed_passenger).must_be_nil
+    end
   end
 end
