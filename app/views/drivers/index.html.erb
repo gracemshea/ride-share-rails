@@ -7,13 +7,7 @@
   <ul>
     <% @drivers.each do |driver| %>
       <li>
-        <strong>
-          <span class="fas fa-paw"></span>  <%= link_to driver.name, driver_path(driver) %>
-        </strong>
-        <strong>
-          VIN:
-        </strong>
-        <%= driver.vin%>
+        <p>ID: <strong><%=link_to driver.id, driver_path(driver.id)%></strong> Name: <span class="fas fa-paw"></span>  <strong><%= link_to driver.name, driver_path(driver) %></strong> VIN: <%= driver.vin%></p>
       </li>
     <% end %>
   </ul>
