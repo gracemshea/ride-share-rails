@@ -21,6 +21,10 @@ class DriversController < ApplicationController
     driver_id = params[:id]
 
     @driver = Driver.find_by(id: driver_id)
+
+    unless @driver
+      head :not_found
+    end
   end
 
   def create

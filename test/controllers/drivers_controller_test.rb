@@ -34,8 +34,6 @@ describe DriversController do
   end
 
   describe "show" do
-    # Your tests go here
-
     it "returns a 404 status code if the driver doesn't exist" do
 
       # Arrange
@@ -47,10 +45,25 @@ describe DriversController do
       # Assert
       must_respond_with :not_found
     end
+
+    it "works for a driver that DOES exit" do
+      get driver_path(@driver.id)
+
+      must_respond_with :ok
+    end
   end
 
   describe "edit" do
-    # Your tests go here
+    it "respond with OK for a real driver" do
+      get edit_driver_path(@driver)
+      must_respond_with :ok
+    end
+
+    it "responds with NOT FOUND for a fake driver" do
+      driver_id = Driver.last.id + 1
+      get edit_driver_path(driver_id)
+      must_respond_with :not_found
+    end
   end
 
   describe "update" do
@@ -61,7 +74,6 @@ describe DriversController do
         },
       }
     }
-    # Your tests go here
     it "changes the data on the model" do
       # Assumptions
       @driver.assign_attributes(driver_data[:driver])
@@ -80,6 +92,22 @@ describe DriversController do
     end
 
     it "responds with NOT FOUND for a fake driver" do
+      # Arrange
+      driver_data[:driver][:name] = ""
+
+      # Assumptions
+      @driver.assign_attributes(driver_data[:driver])
+      expect(@driver).wont_be :valid?
+      @driver.reload
+
+      # Act
+      patch driver_path(@driver), params: driver_data
+
+      # Assert
+      must_respond_with :bad_request
+    end
+
+    it "responds with BAD REQUEST for bad data" do
       # Arrange
       driver_data[:driver][:name] = ""
 
@@ -147,6 +175,34 @@ describe DriversController do
   end
 
   describe "destroy" do
-    # Your tests go here
+    it "removes the driver from the database" do
+      # Act
+      expect {
+        delete driver_path(@driver)
+      }.must_change "Driver.count", -1
+
+      # Assert
+      must_respond_with :redirect
+      must_redirect_to drivers_path
+
+      destroyed_driver = Driver.find_by(id: @driver.id)
+      expect(destroyed_driver).must_be_nil
+    end
+
+    it "returns a 404 if the driver doesn't exist" do
+      # Arrange
+      driver_id = 90001
+
+      # Assumptions
+      expect(Driver.find_by(id: driver_id)).must_be_nil
+
+      # Act
+      expect {
+        delete driver_path(driver_id)
+      }.wont_change "Driver.count"
+
+      # Assert
+      must_respond_with :not_found
+    end
   end
 end
