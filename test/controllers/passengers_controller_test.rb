@@ -66,7 +66,6 @@ describe PassengersController do
     end
   end
 
-  # GRACE ===================================
   describe "update" do
     let (:passenger_data) {
       {
@@ -124,7 +123,6 @@ describe PassengersController do
       must_respond_with :bad_request
     end
   end
-  # GRACE END ===================================
 
   describe "new" do
     it "returns status code 200" do

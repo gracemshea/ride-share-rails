@@ -2,8 +2,31 @@ require "test_helper"
 
 describe TripsController do
   before do
-    @trip = Trip.create!(passenger_id: 1, driver_id: 1, date: "20190416", rating: 5, cost: 15.75)
+    @trip = Trip.create!(passenger_id: 1, driver_id: 1, date: Date.today, rating: 5, cost: 15.75)
   end
+
+  describe "index" do
+    it "can get index" do
+
+      # Act
+      get trips_path
+
+      # Assert
+      must_respond_with :ok
+    end
+
+    it "renders even if there are zero trips" do
+      # Arrange
+      Trip.destroy_all
+
+      # Act
+      get trips_path
+
+      # Assert
+      must_respond_with :ok
+    end
+  end
+
   describe "show" do
     it "can get a valid trip" do
       @trip
