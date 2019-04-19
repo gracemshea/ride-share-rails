@@ -55,7 +55,7 @@ class TripsController < ApplicationController
       if @trip.update trip_params
         redirect_to trip_path(@trip.id), { :flash => { :success => "Trip has been updated" } }
       else
-        redirect_to edit_trip_path, :flash => { :error => "Failed to update trip" }
+        redirect_to edit_trip_path, status: :bad_request, :flash => { :error => "Failed to update trip" }
       end
     else
       redirect_to root_path, status: 404, :flash => { :error => "Could not find trip with id: #{params[:id]}" }

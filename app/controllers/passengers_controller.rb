@@ -6,7 +6,7 @@ class PassengersController < ApplicationController
   def show
     @passenger = Passenger.find_by(id: params[:id])
     if !@passenger
-      redirect_to passengers_path(@passenger), :flash => { :error => "Could not find passenger with id: #{params[:id]}" }
+      redirect_to passengers_path(@passenger), status: :not_found, :flash => { :error => "Could not find passenger with id: #{params[:id]}" }
     end
   end
 
@@ -24,9 +24,9 @@ class PassengersController < ApplicationController
   end
 
   def edit
-    @passenger = Passenger.find(params[:id])
+    @passenger = Passenger.find_by(id: params[:id])
     if !@passenger
-      redirect_to passengers_path, :flash => { :error => "Could not find passenger with id: #{params[:id]}" }
+      redirect_to passengers_path, status: :not_found, :flash => { :error => "Could not find passenger with id: #{params[:id]}" }
     end
   end
 
@@ -43,18 +43,19 @@ class PassengersController < ApplicationController
     end
   end
 
-  #  def destroy
-  #     passenger = Passenger.find_by(id: params[:id])
+  def destroy
+    passenger = Passenger.find_by(id: params[:id])
 
-  #     if passenger
-  #       if passenger.destroy
-  #         redirect_to passengers_path, { :flash => { :success => "Passenger has been removed" } }
-  #       else
-  #         redirect_to passengers_path, { :flash => { :error => "Failed to delete passenger" } }
-  #     else
-  #       redirect_to passengers_path, status: 404, :flash => { :error => "Could not find passenger with id: #{params[:id]}" }
-  #     end
-  #   end
+    if passenger
+      if passenger.destroy
+        redirect_to passengers_path, { :flash => { :success => "Passenger has been removed" } }
+      else
+        redirect_to passengers_path, { :flash => { :error => "Failed to delete passenger" } }
+      end
+    else
+      redirect_to passengers_path, status: 404, :flash => { :error => "Could not find passenger with id: #{params[:id]}" }
+    end
+  end
 
   private
 

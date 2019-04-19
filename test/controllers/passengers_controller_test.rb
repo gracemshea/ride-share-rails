@@ -89,7 +89,7 @@ describe PassengersController do
       must_redirect_to passenger_path(@passenger)
 
       @passenger.reload
-      expect(@passenger.name).must_equal(passenger_data[:driver][:name])
+      expect(@passenger.name).must_equal(passenger_data[:passenger][:name])
     end
 
     it "responds with NOT FOUND for a fake passenger" do
@@ -110,7 +110,7 @@ describe PassengersController do
 
     it "responds with BAD REQUEST for bad data" do
       # Arrange
-      driver_data[:passenger][:name] = ""
+      passenger_data[:passenger][:name] = ""
 
       # Assumptions
       @passenger.assign_attributes(passenger_data[:passenger])
@@ -178,7 +178,7 @@ describe PassengersController do
   end
 
   describe "destroy" do
-    it "removes the driver from the database" do
+    it "removes the passenger from the database" do
       # Act
       expect {
         delete passenger_path(@passenger)
