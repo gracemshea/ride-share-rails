@@ -15,11 +15,11 @@
   <% end %>
 
   <%= form_with model: @trip, class: "trip-form" do |f| %>
-    <p>Please fill out trip information</p>
+     <strong><p>Please fill out trip information</p></strong>
 
   <div>
       <%= f.label :passenger_id, "Please enter your Passenger ID" %>
-      <%= f.text_field :passenger_id, placeholder: "Your ID number" %>
+      <div class="field"><%= f.text_field :passenger_id, placeholder: "Your ID number" %></div>
     </div>
 
     <div class="submit"><%= f.submit button_text %></div>

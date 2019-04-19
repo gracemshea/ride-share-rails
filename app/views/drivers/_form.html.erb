@@ -15,16 +15,16 @@
   <% end %>
 
   <%= form_with model: @driver, class: "driver-form" do |f| %>
-    <p>Please fill out driver information</p>
+    <strong><p>Please fill out driver information</p></strong>
 
     <div>
       <%= f.label :name, "Please enter your name" %>
-      <%= f.text_field :name, placeholder: "Ada Lovelace" %>
+      <div class="field"><%= f.text_field :name, placeholder: "Ada Lovelace" %></div>
     </div>
 
     <div>
       <%= f.label :vin, "Please enter your Vehicle Identification Number" %>
-      <%= f.text_field :vin, placeholder: "x-xxxx-xxxx-xxxx-xxxx" %>
+      <div class="field"><%= f.text_field :vin, placeholder: "x-xxxx-xxxx-xxxx-xxxx" %></div>
     </div>
 
     <div class="submit"><%= f.submit button_text %></div>
