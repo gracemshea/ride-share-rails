@@ -1,11 +1,11 @@
-<h2>Passenger's List</h2>
+<h2>Passenger List</h2>
 
 <p>There are currently <%= @passengers.length %> registered passengers.</p>
 
 <ul class="main-list">
   <% @passengers.each do |passenger| %>
     <li>
-      <p>Name: <%=link_to passenger.name, passenger_path(passenger.id)%></p>
+      <p>Name: <span class="fas fa-paw"></span>  <%=link_to passenger.name, passenger_path(passenger.id)%></p>
       <p>Phone Number: <%=passenger.phone_num%></p>
     </li>
   <% end %>

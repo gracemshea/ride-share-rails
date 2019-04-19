@@ -1,16 +1,16 @@
-<h2>List of Trips</h2>
+<h2>Trip List</h2>
 
-<p>There are currently <%= @trips.length %> recorded trips.</p>
+<h3>There are currently <%= @trips.length %> recorded trips.</h3>
 
 <ul>
   <% @trips.each do |trip| %>
     <li>
-      <p>ID: <%= link_to trip.id, trip_path(trip.id) %></p>
-      <p>Date: <%= trip.date %></p>
-      <p>Rating: <%= trip.rating.nil? ? "TBD" : trip.rating %></p>
+      <p>ID:<span class="fas fa-paw"></span>  <%= link_to trip.id, trip_path(trip.id) %></p>
+      <p>Date:<%= trip.date %></p>
+      <p>Rating:<%= trip.rating.nil? ? "TBD" : trip.rating %></p>
       <p>Cost: <%= trip.cost.nil? ? "TBD" :  "$" '%.2f' % (trip.cost/100) %></p>
-      <p>Passenger: <%= link_to trip.passenger.name, passenger_path(trip.passenger.id) %></p>
-      <p>Driver: <%= link_to trip.driver.name, driver_path(trip.driver.id) %> </p>
+      <p>Passenger:<span class="fas fa-paw"></span>  <%= link_to trip.passenger.name, passenger_path(trip.passenger.id) %></p>
+      <p>Driver:<span class="fas fa-paw"></span>  <%= link_to trip.driver.name, driver_path(trip.driver.id) %> </p>
     </li>
   <% end %>
 </ul>
