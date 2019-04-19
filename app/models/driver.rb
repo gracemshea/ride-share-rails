@@ -22,7 +22,7 @@ class Driver < ApplicationRecord
 
     ratings = []
     self.trips.each do |trip|
-      ratings << trip.rating
+      ratings << trip.rating unless trip.rating == nil
     end
 
     average_rating = 0

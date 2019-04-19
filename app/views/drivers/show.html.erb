@@ -12,6 +12,11 @@
   </p>
 
   <p>
+		<span class="fas fa-paw"></span><span>  <%= link_to "Edit", edit_driver_path(@driver.id)  %></span>
+		<span class="fas fa-paw"></span><span>  <%= link_to "Delete", driver_path(@driver.id), method: :delete, data: {confirm: "Are you sure?"} %></span>
+	</p>
+
+  <p>
     <span class="fas fa-paw"></span>  <%= link_to 'See trips', driver_trips_path(@driver) %></td>
   </p>
 

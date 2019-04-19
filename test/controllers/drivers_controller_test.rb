@@ -1,6 +1,9 @@
 require "test_helper"
 
 describe DriversController do
+  before do
+    @driver = Driver.create!(name: "Test Driver", vin: "0000000000")
+  end
   describe "index" do
     it "can get index" do
       # Your code here
@@ -54,12 +57,42 @@ describe DriversController do
     let (:driver_data) {
       {
         driver: {
-          name: "changed",
+          name: "changed name",
         },
       }
     }
     # Your tests go here
     it "changes the data on the model" do
+      # Assumptions
+      @driver.assign_attributes(driver_data[:driver])
+      expect(@driver).must_be :valid?
+      @driver.reload
+
+      # Act
+      patch driver_path(@driver), params: driver_data
+
+      # Assert
+      must_respond_with :redirect
+      must_redirect_to driver_path(@driver)
+
+      @driver.reload
+      expect(@driver.name).must_equal(driver_data[:driver][:name])
+    end
+
+    it "responds with NOT FOUND for a fake driver" do
+      # Arrange
+      driver_data[:driver][:name] = ""
+
+      # Assumptions
+      @driver.assign_attributes(driver_data[:driver])
+      expect(@driver).wont_be :valid?
+      @driver.reload
+
+      # Act
+      patch driver_path(@driver), params: driver_data
+
+      # Assert
+      must_respond_with :bad_request
     end
   end
 
