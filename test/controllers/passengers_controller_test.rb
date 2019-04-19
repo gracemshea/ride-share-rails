@@ -125,11 +125,51 @@ describe PassengersController do
   end
 
   describe "new" do
-    # Your tests go here
+    it "returns status code 200" do
+      get new_passenger_path
+      must_respond_with :ok
+    end
   end
 
   describe "create" do
-    # Your tests go here
+    # Arrange
+    passenger_data = {
+      passenger: {
+        name: "Test Passenger",
+        phone_num: "123-456-7890",
+      },
+    }
+
+    # Act
+    expect {
+      post passengers_path, params: passenger_data
+    }.must_change "Passenger.count", +1
+
+    # Assert
+    must_respond_with :redirect
+    must_redirect_to passengers_path
+
+    passenger = Passenger.last
+    expect(passenger.name).must_equal passenger_data[:passenger][:name]
+    expect(passenger.vin).must_equal passenger_data[:passenger][:phone_num]
+  end
+
+  it "sends back bad_request if no passenger data is sent" do
+    # Arrange
+    passenger_data = {
+      passenger: {
+        name: "",
+      },
+    }
+
+    # Act
+    expect {
+      post passengers_path, params: passenger_data
+    }.wont_change "Passenger.count"
+
+    # Assert
+    must_respond_with :bad_request
+  end
   end
 
   describe "destroy" do
