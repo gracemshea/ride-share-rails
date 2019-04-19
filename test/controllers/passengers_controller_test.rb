@@ -170,7 +170,6 @@ describe PassengersController do
     # Assert
     must_respond_with :bad_request
   end
-  end
 
   describe "destroy" do
     it "removes the driver from the database" do
