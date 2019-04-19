@@ -154,23 +154,23 @@ describe PassengersController do
       expect(passenger.name).must_equal passenger_data[:passenger][:name]
       expect(passenger.vin).must_equal passenger_data[:passenger][:phone_num]
     end
-  end
 
-  it "sends back bad_request if no passenger data is sent" do
-    # Arrange
-    passenger_data = {
-      passenger: {
-        name: "",
-      },
-    }
+    it "sends back bad_request if no passenger data is sent" do
+      # Arrange
+      passenger_data = {
+        passenger: {
+          name: "",
+        },
+      }
 
-    # Act
-    expect {
-      post passengers_path, params: passenger_data
-    }.wont_change "Passenger.count"
+      # Act
+      expect {
+        post passengers_path, params: passenger_data
+      }.wont_change "Passenger.count"
 
-    # Assert
-    must_respond_with :bad_request
+      # Assert
+      must_respond_with :bad_request
+    end
   end
 
   describe "destroy" do
