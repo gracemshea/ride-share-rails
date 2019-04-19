@@ -1,27 +1,30 @@
-<h2>Passenger Form</h2>
 
-<% if @passenger.errors.any? %>
-  <ul class="errors">
-    <% @passenger.errors.each do |column, message| %>
-      <li>
-        <% if column == :phone_num %>
-            <% column = "Phone number"%>
-        <% end%>
-        <strong><%= column.capitalize %></strong> <%= message %>
-      </li>
-    <% end %>
-  </ul>
-<% end %>
+<main>
 
-<%= form_with model: @passenger, class: 'passenger-form' do |f| %>
+  <% if @passenger.errors.any? %>
+    <ul class="errors">
+      <% @passenger.errors.each do |column, message| %>
+        <li>
+          <% if column == :phone_num %>
+              <% column = "Phone number"%>
+          <% end%>
+          <strong><%= column.capitalize %></strong> <%= message %>
+        </li>
+      <% end %>
+    </ul>
+  <% end %>
+
+  <%= form_with model: @passenger, class: 'passenger-form' do |f| %>
+    
+
+      <%= f.label :name, "Passenger name (required):", class: 'passenger-label'%>
+      <%= f.text_field :name, placeholder: "Passenger Name", class: 'passenger-input'%>
   
+      <%= f.label :phone_num, "Phone Number:", class: 'passenger-label' %>
+      <%= f.text_field :phone_num, placeholder: "XXX-XXX-XXXX", class: 'passenger-input' %>
+  
+    <%= f.submit "Save", class: 'save-button' %>
+  <% end %>
 
-    <%= f.label :name, "Passenger name (required):", class: 'passenger-label'%>
-    <%= f.text_field :name, placeholder: "Passenger Name", class: 'passenger-input'%>
- 
-    <%= f.label :phone_num, "Phone Number:", class: 'passenger-label' %>
-    <%= f.text_field :phone_num, placeholder: "XXX-XXX-XXXX", class: 'passenger-input' %>
- 
-  <%= f.submit "Save", class: 'save-button' %>
-<% end %>
+</main>
 

@@ -1,28 +1,28 @@
-<h2>Trip Form</h2>
+<main>
+  <% if @trip.errors.messages.any? %>
+    <section class="error-messages">
+      There were some problems with your submission!
+      <ul>
+        <% @trip.errors.messages.each do |column, problem_list| %>
+          <% problem_list.each do |problem| %>
+            <li>
+              <%= column %>: <%= problem %>
+            </li>
+          <% end %>
+        <% end %>  
+      </ul>
+    </section>
+  <% end %>
 
-<% if @trip.errors.messages.any? %>
-  <section class="error-messages">
-    There were some problems with your submission!
-    <ul>
-      <% @trip.errors.messages.each do |column, problem_list| %>
-        <% problem_list.each do |problem| %>
-          <li>
-            <%= column %>: <%= problem %>
-          </li>
-        <% end %>
-      <% end %>  
-    </ul>
-  </section>
-<% end %>
+  <%= form_with model: @trip, class: "trip-form" do |f| %>
+    <p>Please fill out trip information</p>
 
-<%= form_with model: @trip, class: "trip-form" do |f| %>
-  <p>Please fill out trip information</p>
+  <div>
+      <%= f.label :passenger_id, "Please enter your Passenger ID" %>
+      <%= f.text_field :passenger_id, placeholder: "Your ID number" %>
+    </div>
 
- <div>
-    <%= f.label :passenger_id, "Please enter your Passenger ID" %>
-    <%= f.text_field :passenger_id, placeholder: "Your ID number" %>
-  </div>
+    <%= f.submit button_text %>
 
-  <%= f.submit button_text %>
-
-<% end %>
+  <% end %>
+</main>

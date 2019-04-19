@@ -16,9 +16,18 @@ header {
   line-height: .15em;
 }
 
+h2 {
+  background-color: white;
+  /* position: sticky; */
+}
+
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Luckiest Guy', cursive;
   text-align: center;
+}
+
+h2, h3, h4, h5, h6 {
+  font-family: 'Unica One', cursive;
 }
 
 h1 {
@@ -32,6 +41,8 @@ h2 {
 header h2 {
   color: #000000;
   font-family: 'Luckiest Guy', cursive;
+  background-color: #FDD935;
+
 }
 
 ul {

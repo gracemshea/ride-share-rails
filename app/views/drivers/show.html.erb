@@ -1,25 +1,27 @@
 <h2>Driver Details</h2>
 
-<p>
-  Name: <%= @driver.name %>
-</p>
-<p>
-  VIN:  <%= @driver.vin %>
-</p>
-<p>
-  Average rating:  <%= @driver.average_rating %>
-</p>
+<main>
+  <p>
+    Name: <%= @driver.name %>
+  </p>
+  <p>
+    VIN:  <%= @driver.vin %>
+  </p>
+  <p>
+    Average rating:  <%= @driver.average_rating %>
+  </p>
 
-<p>
-  <span class="fas fa-paw"></span>  <%= link_to 'See trips', driver_trips_path(@driver) %></td>
-</p>
+  <p>
+    <span class="fas fa-paw"></span>  <%= link_to 'See trips', driver_trips_path(@driver) %></td>
+  </p>
 
-<h3>Trips History</h3>
+  <h3>Trips History</h3>
 
-<ul>
-  <% @driver.trips.each do |trip|%>
-    <li>
-      <%= trip.date %>
-    </li>
-  <% end %>
-</ul>
+  <ul>
+    <% @driver.trips.each do |trip|%>
+      <li>
+        <%= trip.date %>
+      </li>
+    <% end %>
+  </ul>
+</main>

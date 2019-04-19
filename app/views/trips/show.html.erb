@@ -1,16 +1,21 @@
-<h2>Trip Details</h2>
+    
+    
+    
+    <h2>Trip Details</h2>
 
-  <table>
-    <tbody>
-      <tr>
-        <td>Trip ID: <%=@trip.id%> </td>
-        <td>Date: <%=@trip.date%> </td>
-        <td>Rating: <%=@trip.rating%> </td>
-        <td>Cost: <%=  @trip.cost.nil? ? "TBD" :  "$" '%.2f'%(@trip.cost/100) %></td>
-        <td><span class="fas fa-paw"></span>Passenger: <%= link_to @trip.passenger.name, passenger_path(@trip.passenger.id) %></td>
-        <td><span class="fas fa-paw"></span>Driver: <%= link_to @trip.driver.name, driver_path(@trip.driver.id)%></td>
-        <td><span class="fas fa-paw"></span><%= link_to "Edit Rating", edit_trip_path(@trip.id) %></td>
-        <td><span class="fas fa-paw"></span><%= link_to "Delete", trip_path(@trip.id), method: :delete, data: { confirm: "Are you sure you want to delete this trip?" } %></td>
-    </tbody>
-  </table>
-  
+    <main>
+      <table>
+        <tbody>
+          <tr>
+            <td>Trip ID: <%=@trip.id%> </td>
+            <td>Date: <%=@trip.date%> </td>
+            <td>Rating: <%=@trip.rating%> </td>
+            <td>Cost: <%=  @trip.cost.nil? ? "TBD" :  "$" '%.2f'%(@trip.cost/100) %></td>
+            <td><span class="fas fa-paw"></span>Passenger: <%= link_to @trip.passenger.name, passenger_path(@trip.passenger.id) %></td>
+            <td><span class="fas fa-paw"></span>Driver: <%= link_to @trip.driver.name, driver_path(@trip.driver.id)%></td>
+            <td><span class="fas fa-paw"></span><%= link_to "Edit Rating", edit_trip_path(@trip.id) %></td>
+            <td><span class="fas fa-paw"></span><%= link_to "Delete", trip_path(@trip.id), method: :delete, data: { confirm: "Are you sure you want to delete this trip?" } %></td>
+          <tr>
+        </tbody>
+      </table>
+    </main>

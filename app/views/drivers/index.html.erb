@@ -1,17 +1,20 @@
 <h2>Driver's List</h2>
+<h4>There are currently <%= @drivers.length %> registered drivers.</h4>
 
-<p>There are currently <%= @drivers.length %> registered drivers.</p>
+<main>
+  
 
-<ul>
-  <% @drivers.each do |driver| %>
-    <li>
-      <strong>
-        <span class="fas fa-paw"></span>  <%= link_to driver.name, driver_path(driver) %>
-      </strong>
-      <strong>
-        VIN:
-      </strong>
-      <%= driver.vin%>
-    </li>
-  <% end %>
-</ul>
+  <ul>
+    <% @drivers.each do |driver| %>
+      <li>
+        <strong>
+          <span class="fas fa-paw"></span>  <%= link_to driver.name, driver_path(driver) %>
+        </strong>
+        <strong>
+          VIN:
+        </strong>
+        <%= driver.vin%>
+      </li>
+    <% end %>
+  </ul>
+</main>
