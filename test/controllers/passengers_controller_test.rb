@@ -133,47 +133,49 @@ describe PassengersController do
   #   end
   # end
 
-  # describe "create" do
-  #   it "creates a new passenger" do
-  #     # Arrange
-  #     passenger_data = {
-  #       passenger: {
-  #         name: "Test Passenger",
-  #         phone_num: "123-456-7890",
-  #       },
-  #     }
+  describe "create" do
+    it "creates a new passenger" do
+      # Arrange
+      passenger_data = {
+        passenger: {
+          name: "Test Passenger",
+          phone_num: "123-456-7890",
+        },
+      }
 
-  #     # Act
-  #     expect {
-  #       post passengers_path, params: passenger_data
-  #     }.must_change "Passenger.count", +1
+      # Act
+      expect {
+        post passengers_path, params: passenger_data
+      }.must_change "Passenger.count", +1
 
-  #     # Assert
-  #     must_respond_with :redirect
-  #     must_redirect_to passengers_path
+      new_passenger_id = Passenger.last.id
 
-  #     passenger = Passenger.last
-  #     expect(passenger.name).must_equal passenger_data[:passenger][:name]
-  #     expect(passenger.vin).must_equal passenger_data[:passenger][:phone_num]
-  #   end
+      # Assert
+      must_respond_with :redirect
+      must_redirect_to passenger_path(new_passenger_id)
 
-  #   it "sends back bad_request if no passenger data is sent" do
-  #     # Arrange
-  #     passenger_data = {
-  #       passenger: {
-  #         name: "",
-  #       },
-  #     }
+      passenger = Passenger.last
+      expect(passenger.name).must_equal passenger_data[:passenger][:name]
+      expect(passenger.phone_num).must_equal passenger_data[:passenger][:phone_num]
+    end
 
-  #     # Act
-  #     expect {
-  #       post passengers_path, params: passenger_data
-  #     }.wont_change "Passenger.count"
+    it "sends back bad_request if no passenger data is sent" do
+      # Arrange
+      passenger_data = {
+        passenger: {
+          name: "",
+        },
+      }
 
-  #     # Assert
-  #     must_respond_with :bad_request
-  #   end
-  # end
+      # Act
+      expect {
+        post passengers_path, params: passenger_data
+      }.wont_change "Passenger.count"
+
+      # Assert
+      must_respond_with :bad_request
+    end
+  end
 
   describe "destroy" do
     it "removes the driver from the database" do
@@ -190,7 +192,7 @@ describe PassengersController do
       expect(destroyed_passenger).must_be_nil
     end
 
-    it "returns a 404 if the driver doesn't exit" do
+    it "returns a 404 if the passenger doesn't exit" do
       # Arrange
       passenger_id = 90001
 

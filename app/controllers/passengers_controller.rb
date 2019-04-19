@@ -15,7 +15,7 @@ class PassengersController < ApplicationController
     if @passenger.save
       redirect_to passenger_path(@passenger.id), { :flash => { :success => "Passenger has been added" } }
     else
-      redirect_to :new, :flash => { :error => "Failed to add passenger" }
+      render :new, status: :bad_request, :flash => { :error => "Failed to add passenger" }
     end
   end
 
