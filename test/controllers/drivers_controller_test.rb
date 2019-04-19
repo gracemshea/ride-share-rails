@@ -43,8 +43,6 @@ describe DriversController do
 
       # Assert
       must_respond_with :not_found
-
-      # should_respond_with_status :missing
     end
   end
 
@@ -53,19 +51,26 @@ describe DriversController do
   end
 
   describe "update" do
+    let (:driver_data) {
+      {
+        driver: {
+          name: "changed",
+        },
+      }
+    }
     # Your tests go here
+    it "changes the data on the model" do
+    end
   end
 
   describe "new" do
-    # Your tests go here
-    it "retruns status code 200" do
+    it "returns status code 200" do
       get new_driver_path
       must_respond_with :ok
     end
   end
 
   describe "create" do
-    # Your tests go here
     it "creates a new driver" do
 
       # Arrange

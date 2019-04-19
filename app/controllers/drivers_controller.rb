@@ -18,7 +18,9 @@ class DriversController < ApplicationController
   end
 
   def edit
-    @driver = Driver.find(params[:id])
+    driver_id = params[:id]
+
+    @driver = Driver.find_by(id: driver_id)
   end
 
   def create
