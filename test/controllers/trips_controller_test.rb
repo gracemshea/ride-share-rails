@@ -40,10 +40,11 @@ describe TripsController do
           driver_id: 1,
           date: Date.today,
           rating: 5,
-          cost: 15.75,
+          cost: 16.83,
         },
       }
 
+      # Act-Assert
       expect {
         patch trip_path(id: test_id), params: trip_hash
       }.wont_change "Trip.count"
@@ -52,44 +53,84 @@ describe TripsController do
 
       expect(updated_trip.passenger_id).must_equal 1
       expect(updated_trip.date).must_equal Date.today
+      expect(updated_trip.cost).must_equal 16.83
 
       must_respond_with :redirect
       must_redirect_to trip_path(test_id)
     end
+
+    it "responds with NOT FOUND for a fake trip" do
+      # Arrange
+      fake_id = (Trip.all.last.id) + 5
+      trip_hash = {
+        trip: {
+          passenger_id: 1,
+          driver_id: 1,
+          date: Date.today,
+          rating: 5,
+          cost: 16.83,
+        },
+      }
+
+      # Act
+      patch trip_path(id: fake_id), params: trip_hash
+
+      # Assert
+      must_respond_with :not_found
+    end
+
+    # TODO - FIX THIS TEST.  CURRENTLY RETURNS FOUND
+    it "responds with BAD REQUEST for bad data" do
+      # Arrange
+      trip_id = Trip.all.last.id
+
+      trip_hash = {
+        trip: {
+          passenger_id: "fake passenger",
+          driver_id: 1,
+          date: "Bad date",
+          rating: 5,
+          cost: 16.83,
+        },
+      }
+      # Act
+      patch trip_path(id: trip_id), params: trip_hash
+
+      # Assert
+      must_respond_with :bad_request
+    end
   end
 end
 
-#   # don't need this one
+# describe "create" do
+#   it "can create a new trip" do
+#     trip_hash = {
+#       trip: {
+#         passenger_id: 2,
+#         driver_id: 2,
+#         date: "20190416",
+#         rating: 5,
+#         cost: 15.75,
+#       },
+#     }
 
-#   # describe "create" do
-#   #   it "can create a new trip" do
-#   #     trip_hash = {
-#   #       trip: {
-#   #         passenger_id: 2,
-#   #         driver_id: 2,
-#   #         date: "20190416",
-#   #         rating: 5,
-#   #         cost: 15.75,
-#   #       },
-#   #     }
+#     # Act-Assert
+#     expect {
+#       post trips_path, params: trip_hash
+#     }.must_change "Trip.count", 1
 
-#   #     # Act-Assert
-#   #     expect {
-#   #       post trips_path, params: trip_hash
-#   #     }.must_change "Trip.count", 1
+#     new_trip = Trip.find_by(name: trip_hash[:trip][:id])
 
-#   #     new_trip = Trip.find_by(name: trip_hash[:trip][:id])
+#     expect(new_trip.passenger_id).must_equal trip_hash[:trip][:passenger_id]
+#     expect(new_trip.driver_id).must_equal trip_hash[:trip][:driver_id]
+#     expect(new_trip.date).must_equal trip_hash[:trip][:date]
+#     expect(new_trip.rating).must_equal trip_hash[:trip][:rating]
+#     expect(new_trip.cost).must_equal trip_hash[:trip][:cost]
 
-#   #     expect(new_trip.passenger_id).must_equal trip_hash[:trip][:passenger_id]
-#   #     expect(new_trip.driver_id).must_equal trip_hash[:trip][:driver_id]
-#   #     expect(new_trip.date).must_equal trip_hash[:trip][:date]
-#   #     expect(new_trip.rating).must_equal trip_hash[:trip][:rating]
-#   #     expect(new_trip.cost).must_equal trip_hash[:trip][:cost]
-
-#   #     must_respond_with :redirect
-#   #     must_redirect_to trip_path(new_trip.id)
-#   #   end
-#   # end
+#     must_respond_with :redirect
+#     must_redirect_to trip_path(new_trip.id)
+#   end
+# end
 
 #   describe "destroy" do
 #     it "removes a trip from the database" do
