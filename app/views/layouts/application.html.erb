@@ -16,25 +16,21 @@
   <body>
     <header>
       <nav>
-        <ul>
-          <li>
-             <span class="fas fa-paw"></span>  <%= link_to 'View All Drivers', drivers_path %>
-          </li>
-          <li>
-            <span class="fas fa-paw"></span>  <%= link_to 'View All Passengers', passengers_path %>
-          </li>
-          <li>
-            <span class="fas fa-paw"></span>  <%= link_to "List of Trips", trips_path %>
-          </li>
-          <li>
-             <span class="fas fa-paw"></span>  <%= link_to "Register New Passenger", new_passenger_path %>
-          </li>
-          <li>
-             <span class="fas fa-paw"></span>  <%= link_to "Register New Driver", new_driver_path %>
-          </li>
+<h1 class ="header">  <br>Tail-Wagon </h1>
+<h2>A Pet-Friendly Rideshare App</h2>
+<%# dog face, will embed at later stages of styling %>
+ <%# <%= link_to(image_tag("dogface.png", alt: "home", class: "icon"),root_path) %> 
 
-        </ul>
-      </nav>
+  <ul>
+  <li><span class="fas fa-paw"></span><%= link_to 'List of Drivers', drivers_path %></li>
+  <li><span class="fas fa-paw"></span><%= link_to "List of Passengers", passengers_path%></li>
+  <li><span class="fas fa-paw"></span><%= link_to "List of Trips", trips_path%> </li>
+  <li><span class="fas fa-paw"></span><%= link_to "New Driver Registration", new_driver_path%> </li>
+  <li><span class="fas fa-paw"></span><%= link_to "New Passenger Registration", new_passenger_path%> </li>
+  <li><span class="fas fa-paw"></span><%= link_to "Request a New Trip", new_trip_path%> </li>
+  </ul>
+</nav>
+
     </header>
     <%= yield %>
   </body>
