@@ -29,34 +29,35 @@ describe TripsController do
       expect(flash[:error]).must_equal "Could not find trip with id: -1"
     end
   end
+
+  describe "update" do
+    it "can update an existing trip" do
+      # Arrange
+      test_id = Trip.last.id
+      trip_hash = {
+        trip: {
+          passenger_id: 1,
+          driver_id: 1,
+          date: Date.today,
+          rating: 5,
+          cost: 15.75,
+        },
+      }
+
+      expect {
+        patch trip_path(id: test_id), params: trip_hash
+      }.wont_change "Trip.count"
+
+      updated_trip = Trip.find_by(id: test_id)
+
+      expect(updated_trip.passenger_id).must_equal 1
+      expect(updated_trip.date).must_equal Date.today
+
+      must_respond_with :redirect
+      must_redirect_to trip_path(test_id)
+    end
+  end
 end
-
-#   describe "update" do
-#     it "can update an existing trip" do
-#       # Arrange
-#       test_id = Trip.last.id
-#       trip_hash = {
-#         trip: {
-#           passenger_id: 1,
-#           driver_id: 1,
-#           date: Date.today,
-#           rating: 5,
-#           cost: 15.75,
-#         },
-#       }
-
-#       expect {
-#         patch trip_path(test_id), params: trip_hash
-#       }.wont_change "Trip.count"
-
-#       updated_trip = Trip.find_by(id: trip_hash[:trip][:id])
-
-#       expect(updated_trip.id).must_equal trip_hash[:trip][:id]
-
-#       must_respond_with :redirect
-#       must_redirect_to trip_path(test_id)
-#     end
-#   end
 
 #   # don't need this one
 
