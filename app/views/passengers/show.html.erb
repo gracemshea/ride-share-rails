@@ -1,21 +1,29 @@
-<h2>Passenger details page</h2>
+<h2>Passenger Details</h2>
 
-
-<p>Name:<%=@passenger.name%></p>
-<p>Phone Number:<%=@passenger.phone_num%></p>
-
-<table>
-	<tbody>
-    <%@passenger.trips.each do |trip|%>
-		<tr>
-            <td>Trip ID: <%=trip.id%> </td>
-			<td>Date: <%=trip.date%> </td>
-			<td>Rating: <%=trip.rating%> </td>
-			<td>Cost: $<%='%.2f'%(trip.cost/100) %></td>
-			<td>Driver: <%= link_to trip.driver.name, driver_path(trip.driver.id)%></td>
-		</tr>
-        <%end%>
-	</tbody>
-</table>
-
-<p><%=@passenger.name%> has spent a total of $<%='%.2f'% @passenger.total_amount%> on Tail-Wagon.</p>
+<ul class="detail-list">
+	<li class="passenger-details">
+		<p id="name">Name:<%=@passenger.name%></p>
+		<p>Phone Number:<%=@passenger.phone_num%></p>
+		<p>Total Trips: <%= @passenger.trips.count %></p>
+		<p>Total Spent: $<%='%.2f'% @passenger.total_amount%></p>
+		<p> <span><%= link_to "Edit", edit_passenger_path(@passenger.id)  %></span>
+    		<span><%= link_to "Delete", passenger_path(@passenger.id), method: :delete, data: {confirm: "Are you sure?"} %></span>
+		</p>
+		<h3><%=@passenger.name%>'s Trips:</h3>
+		<table>
+			<tbody>
+			<%@passenger.trips.each do |trip|%>
+				<tr>
+					<td>Trip ID: <%=trip.id%> </td>
+					<td>Date: <%=trip.date%> </td>
+					<td>Rating: <%=trip.rating%> </td>
+					<td>Cost: $<%='%.2f'%(trip.cost/100) %></td>
+					<td>Driver: <%= link_to trip.driver.name, driver_path(trip.driver.id)%></td>
+					<td><%= link_to "Edit", edit_trip_path(trip.id) %></td>
+    				<td><%= link_to "Delete", trip_path(trip.id), method: :delete, data: { confirm: "Are you sure you want to delete this trip?" } %></td>
+				</tr>
+				<%end%>
+			</tbody>
+		</table>
+	</li>
+</ul>
