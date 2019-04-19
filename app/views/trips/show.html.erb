@@ -1,6 +1,5 @@
 <h2>Trip details page</h2>
 
-<nav>
   <table>
     <tbody>
       <tr>
@@ -10,8 +9,9 @@
         <td>Cost: <%=  @trip.cost.nil? ? "TBD" :  "$" '%.2f'%(@trip.cost/100) %></td>
         <td>Passenger: <%= link_to @trip.passenger.name, passenger_path(@trip.passenger.id) %></td>
         <td>Driver: <%= link_to @trip.driver.name, driver_path(@trip.driver.id)%></td>
+        <td><%= link_to "Edit Rating", edit_trip_path(@trip.id) %></td>
+        <td><%= link_to "Delete", trip_path(@trip.id), method: :delete, data: { confirm: "Are you sure you want to delete this trip?" } %></td>
       </tr>
-         
     </tbody>
   </table>
-</nav>
+  

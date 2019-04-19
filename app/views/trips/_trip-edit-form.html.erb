@@ -1,0 +1,15 @@
+
+<table>
+    <tbody>
+      <tr>
+        <td>Driver: <%= @trip.driver.name %></td>
+        <td>Trip Date: <%= @trip.date %></td>
+        <td><%= form_with model: @trip, class: 'trip-form' do |f| %></td>
+        <td><%= f.label :rating %></td>
+        <td> <%= f.select :rating, options_for_select([1, 2, 3, 4, 5], selected=@trip.rating) %></td>
+        <td> <%= f.submit "Save", class: 'save-button' %></td>
+        <td><% end %></td>
+      </tr>
+    </tbody>
+  </table>
+  
