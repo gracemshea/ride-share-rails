@@ -132,26 +132,28 @@ describe PassengersController do
   end
 
   describe "create" do
-    # Arrange
-    passenger_data = {
-      passenger: {
-        name: "Test Passenger",
-        phone_num: "123-456-7890",
-      },
-    }
+    it "creates a new passenger" do
+      # Arrange
+      passenger_data = {
+        passenger: {
+          name: "Test Passenger",
+          phone_num: "123-456-7890",
+        },
+      }
 
-    # Act
-    expect {
-      post passengers_path, params: passenger_data
-    }.must_change "Passenger.count", +1
+      # Act
+      expect {
+        post passengers_path, params: passenger_data
+      }.must_change "Passenger.count", +1
 
-    # Assert
-    must_respond_with :redirect
-    must_redirect_to passengers_path
+      # Assert
+      must_respond_with :redirect
+      must_redirect_to passengers_path
 
-    passenger = Passenger.last
-    expect(passenger.name).must_equal passenger_data[:passenger][:name]
-    expect(passenger.vin).must_equal passenger_data[:passenger][:phone_num]
+      passenger = Passenger.last
+      expect(passenger.name).must_equal passenger_data[:passenger][:name]
+      expect(passenger.vin).must_equal passenger_data[:passenger][:phone_num]
+    end
   end
 
   it "sends back bad_request if no passenger data is sent" do
