@@ -14,6 +14,28 @@
   </head>
 
   <body>
+    <header>
+      <nav>
+        <ul>
+          <li>
+             <span class="fas fa-paw"></span>  <%= link_to 'View All Drivers', drivers_path %>
+          </li>
+          <li>
+            <span class="fas fa-paw"></span>  <%= link_to 'View All Passengers', passengers_path %>
+          </li>
+          <li>
+            <span class="fas fa-paw"></span>  <%= link_to "List of Trips", trips_path %>
+          </li>
+          <li>
+             <span class="fas fa-paw"></span>  <%= link_to "Register New Passenger", new_passenger_path %>
+          </li>
+          <li>
+             <span class="fas fa-paw"></span>  <%= link_to "Register New Driver", new_driver_path %>
+          </li>
+
+        </ul>
+      </nav>
+    </header>
     <%= yield %>
   </body>
 </html>
